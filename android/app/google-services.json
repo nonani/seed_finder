@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894080515848",
+    "project_id": "seedfinder-23b19",
+    "storage_bucket": "seedfinder-23b19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894080515848:android:45890f614d311b035f76bd",
+        "android_client_info": {
+          "package_name": "com.example.seed_finder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABaDmhxNZFCguByDAd3KzHZFDJKNw731E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
