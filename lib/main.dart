@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:seed_finder/presentation/view/home_screen.dart';
+import 'package:seed_finder/presentation/view/splash_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -39,8 +41,25 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: FutureBuilder(
+          future: Future.delayed(const Duration(seconds: 3), () => "Intro Completed."),
+          builder: (context, snapshot) {
+            return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 1000),
+                child: _splashLoadingWidget(snapshot)
+            );
+          },
+        )
     );
+  }
+  Widget _splashLoadingWidget(AsyncSnapshot<Object?> snapshot) {
+    if(snapshot.hasError) {
+      return const Text("Error!!");
+    } else if(snapshot.hasData) {
+      return const HomePage();
+    } else {
+      return const SplashPage();
+    }
   }
 }
 
