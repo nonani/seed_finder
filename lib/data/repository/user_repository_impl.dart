@@ -1,6 +1,6 @@
-import '../../domain/datasource/UserDataSource.dart';
-import '../../domain/entity/User.dart';
-import '../../domain/repository/UserRepository.dart';
+import '../../domain/datasource/user_datasource.dart';
+import '../../domain/entity/user.dart';
+import '../../domain/repository/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource dataSource;

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
+import 'package:seed_finder/presentation/provider/auth_provider.dart';
 import 'package:seed_finder/presentation/view/signup_screen.dart';
 
 import '../../style/titlestyle.dart';
@@ -28,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: AppBar(
         shape: Border(bottom: BorderSide(color: Color(0xffdbdbdb), width: 2.5)),
@@ -89,7 +92,9 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-
+                            Logger logger = Logger();
+                            await authProvider.login(email, password);
+                            logger.w(authProvider.user?.toJson());
                           }
                         },
                         child: Text(

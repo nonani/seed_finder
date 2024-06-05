@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../domain/datasource/UserDataSource.dart';
-import '../../domain/entity/User.dart';
+import '../../domain/datasource/user_datasource.dart';
+import '../../domain/entity/user.dart';
+import '../model/user_model.dart';
 
-class UserRemoteDataSource implements UserDataSource {
+class UserDataSourceImpl implements UserDataSource {
   final String apiUrl = "";
-
   @override
   Future<User> getUserById(String id) async {
     final response = await http.get(Uri.parse('$apiUrl/$id'));
@@ -30,5 +30,20 @@ class UserRemoteDataSource implements UserDataSource {
     if (response.statusCode != 200) {
       throw Exception('Failed to create user');
     }
+  }
+
+  @override
+  Future<UserModel> login(String email, String password) async{
+    // final response = await http.post(
+    //   Uri.parse('https://example.com/login'),
+    //   body: {'email': email, 'password': password},
+    // );
+    //
+    // if (response.statusCode == 200) {
+    //   return UserModel.fromJson(json.decode(response.body));
+    // } else {
+    //   throw Exception('Failed to login');
+    // }
+    return UserModel(id: '1', name: 'John Doe', email: '');
   }
 }

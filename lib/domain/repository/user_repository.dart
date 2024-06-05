@@ -1,4 +1,4 @@
-import '../entity/User.dart';
+import '../entity/user.dart';
 
 abstract class UserRepository {
   Future<User> getUserById(String id);
