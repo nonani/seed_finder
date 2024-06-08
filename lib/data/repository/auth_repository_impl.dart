@@ -2,9 +2,8 @@
 
 import 'package:seed_finder/domain/datasource/user_datasource.dart';
 
-import '../../domain/entity/User.dart';
+import '../../domain/entity/user.dart';
 import '../../domain/repository/auth_repository.dart';
-import '../model/user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final UserDataSource userDataSource;
@@ -12,7 +11,7 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.userDataSource});
 
   @override
-  Future<UserModel?> login(String email, String password) async {
+  Future<User?> login(String email, String password) async {
     return await userDataSource.login(email, password);
   }
 }

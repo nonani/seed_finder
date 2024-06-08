@@ -32,15 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     final Size size = MediaQuery.of(context).size;
     final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        shape: Border(bottom: BorderSide(color: Color(0xffdbdbdb), width: 2.5)),
-        backgroundColor: Color(0xfffafafa),
-        elevation: 0,
-        title: Text("로그인",
-            style: featureTitle
-        ),
-        centerTitle: true,
-      ),
+      appBar: null,
       body: SafeArea(
         child: ListView(
           children: [
@@ -52,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
               height: size.height * 0.15,
               child: Center(
                 child: Text(
-                  "CONNEC",
+                  "Seed Finder",
                   style: TextStyle(
                       fontSize: 40,
                       fontFamily: "EchoDream",

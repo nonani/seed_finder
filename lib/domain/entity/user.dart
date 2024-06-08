@@ -1,15 +1,17 @@
 class User {
   final String id;
   String name;
-  String? email;
+  String email;
+  bool isSurveyCompleted;
 
-  User({required this.id, required this.name, this.email});
+  User({required this.id, required this.name, required this.email, required this.isSurveyCompleted});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
       name: json['name'],
       email: json['email'],
+      isSurveyCompleted: json['isSurveyCompleted'],
     );
   }
 
@@ -18,6 +20,8 @@ class User {
     data['id'] = id;
     data['name'] = name;
     data['email'] = email;
+    data['isSurveyCompleted'] = isSurveyCompleted;
     return data;
   }
+
 }

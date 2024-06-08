@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seed_finder/data/datasource/user_datasource_impl.dart';
 import 'package:seed_finder/domain/datasource/user_datasource.dart';
+import 'package:seed_finder/presentation/provider/BusinessInfoProvider.dart';
 import 'package:seed_finder/presentation/provider/auth_provider.dart';
+import 'package:seed_finder/presentation/view/business_survey_main_screen.dart';
 import 'package:seed_finder/presentation/view/home_screen.dart';
 import 'package:seed_finder/presentation/view/login_screen.dart';
 import 'package:seed_finder/presentation/view/splash_screen.dart';
@@ -27,7 +29,9 @@ void main()  async{
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthProvider(loginUseCase: loginUseCase),
+          
         ),
+        ChangeNotifierProvider(create: (context) => BusinessInfoProvider(),)
       ],
       child: const MyApp(),
     ),
@@ -113,7 +117,10 @@ class _MyHomePageState extends State<MyHomePage> {
        if(authProvider.user == null) {
          return const LoginPage();
        } else {
-         return const HomePage();
+         if(authProvider.user?.isSurveyCompleted == false)
+           return const BusinessSurveyMainPage();
+         else
+           return const HomePage();
        }
       },
     );

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../domain/datasource/user_datasource.dart';
 import '../../domain/entity/user.dart';
-import '../model/user_model.dart';
+
 
 class UserDataSourceImpl implements UserDataSource {
   final String apiUrl = "";
@@ -28,12 +28,12 @@ class UserDataSourceImpl implements UserDataSource {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Failed to create user');
+      throw Exception('Failed to create uszer');
     }
   }
 
   @override
-  Future<UserModel> login(String email, String password) async{
+  Future<User> login(String email, String password) async{
     // final response = await http.post(
     //   Uri.parse('https://example.com/login'),
     //   body: {'email': email, 'password': password},
@@ -44,6 +44,6 @@ class UserDataSourceImpl implements UserDataSource {
     // } else {
     //   throw Exception('Failed to login');
     // }
-    return UserModel(id: '1', name: 'John Doe', email: '');
+    return User(id: '1', name: 'John Doe', email: '', isSurveyCompleted: false);
   }
 }
