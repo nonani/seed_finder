@@ -62,10 +62,13 @@ class LoginPage extends ConsumerWidget {
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () async {
-                    if (formKey.currentState?.validate() ?? false) {
+                    // if (formKey.currentState?.validate() ?? false) {
                       formKey.currentState?.save();
                       print("email: $email, password: $password");
-                      final loginResult = await ref.read(userInfoProvider.notifier).login(email: email, pwd: password);
+                      // final loginResult = await ref.read(userInfoProvider.notifier).login(email: email, pwd: password);
+
+                      final loginResult = await ref.read(userInfoProvider.notifier).login(email: "ex1@naver.com", pwd: "aa1234");
+
                       if (loginResult == User.defaultValue) {
                         // 로그인 실패 시 SnackBar 표시
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -74,7 +77,7 @@ class LoginPage extends ConsumerWidget {
                             duration: const Duration(seconds: 2),
                           ),
                         );
-                      }
+                      // }
                     }
                   },
                   child: const Text("Login"),

@@ -7,20 +7,28 @@ part 'survey.freezed.dart';
 
 part 'survey.g.dart';
 
-@freezed
+@Freezed(toJson: true)
 class Survey with _$Survey {
   @JsonSerializable(explicitToJson: true)
   const factory Survey({
     required List<String> businessCategory,
-    required List<String> businessRegion,
+    required List<Region> businessRegion,
     required List<String> businessApply,
     required int businessExperience,
     required int businessTargetAge,
   }) = _Survey;
-  
+
   factory Survey.fromJson(Map<String, dynamic> json) => _$SurveyFromJson(json);
+  static const defaultValue = Survey(
+    businessCategory: [],
+    businessRegion: [],
+    businessApply: [],
+    businessExperience: 1,
+    businessTargetAge: 24,
+  );
+
   @override
-  Map<String, dynamic> toJson() ;
+  Map<String, dynamic> toJson();
 }
 
 /*

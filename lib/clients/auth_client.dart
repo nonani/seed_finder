@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:seed_finder/utils/dio.dart';
 
 import '../models/user.dart';
-
+import '../models/survey.dart';
 part 'auth_client.g.dart';
-final AuthClient authClient = AuthClient(dio);
+
 
 
 @RestApi(baseUrl: 'user')
@@ -18,8 +17,10 @@ abstract class AuthClient {
     @Field('userPw') required String password,
   });
 
-
-
+  @POST('/info')
+  Future<dynamic> info({
+    @Body() required Survey body,
+  });
 
 
 }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:json_annotation/json_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:seed_finder/models/user.dart';
 import 'package:seed_finder/providers/shared_preferences_provider.dart';
@@ -32,7 +31,6 @@ class UserInfo extends _$UserInfo {
   }
 
   Future<User> _saveEncoded(User user) async {
-    logger.d(user);
     final prefs = ref.read(prefsProvider);
     await prefs.setString(_key, jsonEncode(user));
     return user;
@@ -42,17 +40,23 @@ class UserInfo extends _$UserInfo {
     state = const AsyncValue.loading(); // 로딩 상태로 설정
     print("123");
     state = await AsyncValue.guard(() async {
-      final authClient = await ref.read(authClientProvider.future);
-      final data = await future; // future가 null이 아닌지 확인
+      try {
+        final authClient = await ref.read(authClientProvider.future);
+        final data = await future; // future가 null이 아닌지 확인
 
+        logger.d("data: $data");
+        final loginResult = await authClient.login(email: email, password: pwd);
 
-      final loginResult = await authClient.login(email: email, password: pwd);
-      logger.d("loginResult: $loginResult");
+        await ref
+            .read(accessTokenProvider.notifier)
+            .setValue(loginResult.accessToken.toString());
 
-      await ref.read(accessTokenProvider.notifier).setValue(loginResult.accessToken.toString());
-
-      final user = data.copyWith(accessToken: loginResult.accessToken);
-      return await _saveEncoded(user);
+        final user = data.copyWith(accessToken: loginResult.accessToken);
+        return await _saveEncoded(user);
+      } catch (e) {
+        logger.e("Login error: $e");
+        return User.defaultValue;
+      }
     });
 // guard가 끝나면 state의 값 확인
     if (state is AsyncData) {
