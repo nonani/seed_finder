@@ -4,19 +4,19 @@ import 'package:seed_finder/models/event.dart';
 
 part 'wishlist_client.g.dart';
 
-@RestApi(baseUrl: "/wishlist")
+@RestApi(baseUrl: "/favorite")
 abstract class WishlistClient {
   factory WishlistClient(Dio dio, {String baseUrl}) = _WishlistClient;
 
-  @POST("/delete/{portfolioId}")
-  Future<void> delete(@Path() int portfolioId);
+  @DELETE("/delete/{eventId}")
+  Future<void> delete(@Path() int eventId);
 
-  @GET("/me")
+  @GET("/list")
   Future<List<Event>> getAll({
     @Query("page") int? page,
     @Query("size") int? size,
   });
 
-  @POST("/post/{portfolioId}")
-  Future<void> add(@Path() int portfolioId);
+  @POST("/add/{eventId}")
+  Future<void> add(@Path() int eventId);
 }

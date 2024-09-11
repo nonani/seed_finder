@@ -4,9 +4,11 @@ import 'package:intl/intl.dart';
 
 import 'package:seed_finder/models/event.dart';
 import 'package:seed_finder/pages/calendar_page.dart';
+import 'package:seed_finder/widgets/favorite_toggle_button.dart';
 
 class EventListTile extends StatelessWidget {
   final Event event;
+
   const EventListTile({super.key, required this.event});
 
   @override
@@ -45,16 +47,27 @@ class EventListTile extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 4),
-          Text(
-            event.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  event.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FavoriteToggleButton(event.id),
+            ],
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
         ],
       ),
     );

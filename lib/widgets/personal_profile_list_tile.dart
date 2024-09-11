@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:seed_finder/providers/user_info_provider.dart';
+import 'package:seed_finder/utils/theme.dart';
+import 'package:seed_finder/widgets/cdn_image.dart';
 import 'package:seed_finder/widgets/personal_list_tile.dart';
-
-import '../providers/user_info_provider.dart';
-import '../utils/icons.dart';
-import '../utils/theme.dart';
-import 'cdn_image.dart';
 
 class PersonalProfileListTile extends ConsumerWidget {
   const PersonalProfileListTile({super.key});

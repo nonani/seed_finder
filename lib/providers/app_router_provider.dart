@@ -23,7 +23,7 @@ GoRouter goRouter(GoRouterRef ref) {
     redirect: (context, state) {
       if (isSignedIn) {
         if (state.matchedLocation == '/') {
-          return "/calendar";
+          return "/survey";
         }
       } else {
         if (state.matchedLocation == '/') {

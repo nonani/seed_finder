@@ -11,9 +11,12 @@ abstract class BusinessClient {
   factory BusinessClient(Dio dio, {String baseUrl}) = _BusinessClient;
 
   @GET('/all')
-  Future<Map<String, List<Event>>> getEvents();
+  Future<Map<String, List<Event>>> getAllEvents();
 
   //business/:businessId
   @GET('/{businessId}')
   Future<EventDetail> getEventDetail(@Path() int businessId);
+
+  @GET("/by-survey")
+  Future<Map<String, List<Event>>> getEventsBySurvey();
 }

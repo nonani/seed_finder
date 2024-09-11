@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:seed_finder/providers/event_detail_provider.dart';
+import 'package:seed_finder/widgets/favorite_toggle_button.dart';
 
 class EventDetailPage extends ConsumerWidget {
   final int eventId;
@@ -72,13 +73,7 @@ class EventDetailPage extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            IconButton(
-              icon: const Icon(Icons.favorite_border),
-              color: Colors.blue,
-              onPressed: () {
-                // 즐겨찾기 버튼 로직
-              },
-            ),
+            FavoriteToggleButton(eventId),
           ],
         ),
       ),

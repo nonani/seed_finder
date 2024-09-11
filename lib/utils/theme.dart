@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seed_finder/utils/icons.dart';
 
 // COLOR
 const Color blue500 = Color(0xFF0094FF);
@@ -13,7 +12,7 @@ const Color gray600 = Color(0xFF97989E);
 const Color gray100 = Color(0xFFEBECED);
 const Color white = Colors.white;
 const Color yellow = Color(0xFFFFBD35);
-// const Color red = Color(0xFFFC4032);
+const Color red = Color(0xFFFC4032);
 
 // TYPOGRAPHY
 
@@ -127,8 +126,8 @@ final ThemeData theme = ThemeData(
 
   // COMPONENT THEMES
   actionIconTheme: ActionIconThemeData(
-    backButtonIconBuilder: (context) => const Icon(DearsIcons.caret_left),
-    closeButtonIconBuilder: (context) => const Icon(DearsIcons.close),
+    backButtonIconBuilder: (context) => const Icon(Icons.chevron_left),
+    closeButtonIconBuilder: (context) => const Icon(Icons.close),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: white,

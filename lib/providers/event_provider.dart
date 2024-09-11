@@ -11,7 +11,7 @@ Future<Map<String, List<Event>>> events(EventsRef ref) async {
   final businessClient = await ref.watch(businessClientProvider.future);
 
   // 서버에서 이벤트 데이터를 받아옴
-  final response = await businessClient.getEvents();
-
+  // final response = await businessClient.getAllEvents();
+  final response = await businessClient.getEventsBySurvey();
   return response;
 }
