@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:seed_finder/main.dart';
 import 'package:seed_finder/providers/event_provider.dart';
 import 'package:seed_finder/utils/logger.dart';
 import 'package:seed_finder/widgets/home_navigation_bar.dart';
@@ -43,8 +42,11 @@ class CalendarPage extends HookConsumerWidget {
           // Remove underline
           onChanged: (newMonth) {
             if (newMonth != null) {
-              final newDate = DateTime(_focusedDay.value.year,
-                  months.indexOf(newMonth) + 1, _focusedDay.value.day);
+              final newDate = DateTime(
+                _focusedDay.value.year,
+                months.indexOf(newMonth) + 1,
+                _focusedDay.value.day,
+              );
               _focusedDay.value = newDate;
             }
           },
@@ -60,7 +62,7 @@ class CalendarPage extends HookConsumerWidget {
             onPressed: () {
               // 이벤트 추가
               _focusedDay.value = DateTime.now();
-              },
+            },
             icon: const Icon(Icons.today_rounded),
           ),
           IconButton(
@@ -137,26 +139,26 @@ class CalendarPage extends HookConsumerWidget {
                   _focusedDay.value = format.parse(focusedDay.toString());
                   _selectedDay.value = format.parse(selectedDay.toString());
 
-                  logger.d(events[DateFormat('yyyy-MM-dd')
-                          .parse(selectedDay.toString())] ??
-                      []);
+                  logger.d(events[_selectedDay.toString()] ?? []);
                 },
                 headerStyle: const HeaderStyle(
                   titleCentered: true,
                   formatButtonVisible: false,
                 ),
                 eventLoader: (day) {
-                  return events[
-                          DateFormat('yyyy-MM-dd').parse(day.toString())] ??
-                      [];
+                  return events[DateFormat('yyyy-MM-dd').format(day)] ?? [];
                 },
               ),
               const SizedBox(height: 16),
               Expanded(
                 child: ListView.builder(
-                  itemCount: events[_selectedDay.value]?.length ?? 0,
+                  itemCount: events[DateFormat('yyyy-MM-dd')
+                              .format(_selectedDay.value)]
+                          ?.length ??
+                      0,
                   itemBuilder: (context, index) {
-                    final event = events[_selectedDay.value]![index];
+                    final event = events[DateFormat('yyyy-MM-dd')
+                        .format(_selectedDay.value)]![index];
                     return ListTile(
                       title: Text(event.title),
                       subtitle: Text(event.category),
