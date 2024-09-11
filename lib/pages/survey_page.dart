@@ -1,12 +1,10 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:seed_finder/models/survey_options/survey/survey_form_data.dart';
 import 'package:seed_finder/models/survey_options/survey/survey_options.dart';
 import 'package:seed_finder/providers/app_router_provider.dart';
 import 'package:seed_finder/providers/survey_form_provider.dart';
 import 'package:seed_finder/providers/survey_options_provider.dart';
-
-import '../models/survey_options/survey/survey_form_data.dart';
-import '../utils/logger.dart';
 
 class SurveyPage extends ConsumerWidget {
   const SurveyPage({super.key});
@@ -18,9 +16,9 @@ class SurveyPage extends ConsumerWidget {
     return Scaffold(
       body: surveyOptionsAsync.when(
         data: (surveyOptions) => _buildSurveyForm(ref, surveyOptions),
-        loading: () => Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) =>
-            Center(child: Text('Failed to load survey options')),
+            const Center(child: Text('Failed to load survey options')),
       ),
     );
   }
@@ -30,7 +28,6 @@ class SurveyPage extends ConsumerWidget {
     final surveyNotifier = ref.read(surveyFormProvider.notifier);
 
     return Stepper(
-      type: StepperType.vertical,
       currentStep: surveyForm.id,
       onStepContinue: () {
         if (surveyForm.id < surveyOptions.question.length - 1) {
@@ -41,7 +38,7 @@ class SurveyPage extends ConsumerWidget {
               const SnackBar(content: Text('Survey submitted successfully!')),
             );
             Future.delayed(const Duration(seconds: 1), () {
-              ref.read(goRouterProvider).go('/home');
+              ref.read(goRouterProvider).go('/calendar');
             });
           });
         }
@@ -59,7 +56,10 @@ class SurveyPage extends ConsumerWidget {
   }
 
   List<Step> _buildSteps(
-      WidgetRef ref, SurveyOptions surveyOptions, SurveyFormData surveyForm) {
+    WidgetRef ref,
+    SurveyOptions surveyOptions,
+    SurveyFormData surveyForm,
+  ) {
     final surveyNotifier = ref.read(surveyFormProvider.notifier);
 
     return [
@@ -138,14 +138,16 @@ class SurveyPage extends ConsumerWidget {
     ];
   }
 
-  Widget _buildGrid(List<String> options, List<String> selectedOptions,
-      Function(List<String>) onSelectionChanged) {
+  Widget _buildGrid(
+    List<String> options,
+    List<String> selectedOptions,
+    Function(List<String>) onSelectionChanged,
+  ) {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        childAspectRatio: 1,
       ),
       itemCount: options.length,
       itemBuilder: (context, index) {

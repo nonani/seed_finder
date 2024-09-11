@@ -17,15 +17,15 @@ class LoginPage extends ConsumerWidget {
     // final userInfo = ref.watch(userInfoProvider.notifier);
 
     return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Login Page",
-          style: titleLarge.copyWith(color: Colors.blue),
-        ),
-        const SizedBox(height: 16),
-        Form(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Login Page",
+            style: titleLarge.copyWith(color: Colors.blue),
+          ),
+          const SizedBox(height: 16),
+          Form(
             key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,6 @@ class LoginPage extends ConsumerWidget {
                 LoginEditTextForm(
                   label: "이메일",
                   hint: "example@connec.co.kr",
-                  isSecret: false,
                   onSaved: (newValue) {
                     email = newValue.toString();
                   },
@@ -62,31 +61,36 @@ class LoginPage extends ConsumerWidget {
                 ElevatedButton(
                   onPressed: () async {
                     // if (formKey.currentState?.validate() ?? false) {
-                      formKey.currentState?.save();
-                      print("email: $email, password: $password");
-                      // final loginResult = await ref.read(userInfoProvider.notifier).login(email: email, pwd: password);
+                    formKey.currentState?.save();
+                    // final loginResult = await ref.read(userInfoProvider.notifier).login(email: email, pwd: password);
+                    final loginResult = await ref
+                        .read(userInfoProvider.notifier)
+                        .login(email: "ex1@naver.com", pwd: "aa1234");
 
-                      final loginResult = await ref.read(userInfoProvider.notifier).login(email: "ex1@naver.com", pwd: "aa1234");
-
-                      if (loginResult == User.defaultValue) {
-                        // 로그인 실패 시 SnackBar 표시
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("로그인 실패: 이메일 또는 비밀번호가 잘못되었습니다."),
-                            duration: const Duration(seconds: 2),
-                          ),
-                        );
+                    if (loginResult == User.defaultValue) {
+                      // 로그인 실패 시 SnackBar 표시
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("로그인 실패: 이메일 또는 비밀번호가 잘못되었습니다."),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
                       // }
                     }
                   },
                   child: const Text("Login"),
                 ),
-                ElevatedButton(onPressed: (){
-                  ref.read(userInfoProvider.notifier).logout();
-                }, child: Text("logout"))
+                ElevatedButton(
+                  onPressed: () {
+                    ref.read(userInfoProvider.notifier).logout();
+                  },
+                  child: const Text("logout"),
+                ),
               ],
-            ))
-      ],
-    ));
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

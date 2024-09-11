@@ -1,8 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:seed_finder/models/survey_options/survey/survey_create_body.dart';
 import 'package:seed_finder/models/survey_options/survey/survey_form_data.dart';
 import 'package:seed_finder/providers/auth_client_provider.dart';
-
-import '../models/survey_options/survey/survey_create_body.dart';
 
 part 'survey_form_provider.g.dart';
 
@@ -22,39 +21,37 @@ class SurveyForm extends _$SurveyForm {
     );
   }
 
-  bool get _enabled => state.businessTargetAge != 0 && state.visited.every((element) => element);
+  bool get _enabled =>
+      state.businessTargetAge != 0 && state.visited.every((element) => element);
 
   void setBusinessCategory(List<String> businessCategory) {
     state = state.copyWith(businessCategory: businessCategory);
-    state  = state.copyWith(visited: state.visited..[0] = true);
-
+    state = state.copyWith(visited: state.visited..[0] = true);
   }
 
   void setBusinessApply(List<String> businessApply) {
     state = state.copyWith(businessApply: businessApply);
-    state  = state.copyWith(visited: state.visited..[1] = true);
+    state = state.copyWith(visited: state.visited..[1] = true);
   }
 
   void setBusinessRegion(List<String> businessRegion) {
     state = state.copyWith(businessRegion: businessRegion);
-    state  = state.copyWith(visited: state.visited..[2] = true);
+    state = state.copyWith(visited: state.visited..[2] = true);
   }
 
   void setBusinessTargetAge(int businessTargetAge) {
     state = state.copyWith(businessTargetAge: businessTargetAge);
-    state  = state.copyWith(visited: state.visited..[3] = true);
+    state = state.copyWith(visited: state.visited..[3] = true);
   }
 
   void setBusinessExperience(int businessExperience) {
     state = state.copyWith(businessExperience: businessExperience);
-    state  = state.copyWith(visited: state.visited..[4] = true);
+    state = state.copyWith(visited: state.visited..[4] = true);
   }
-
-
 
   Future<void> submit() async {
     final surveyClient = await ref.read(authClientProvider.future);
-    final response = await surveyClient.create(
+    return await surveyClient.create(
       body: SurveyCreateBody(
         businessCategory: state.businessCategory,
         businessRegion: state.businessRegion,

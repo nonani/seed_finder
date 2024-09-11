@@ -1,11 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:seed_finder/pages/calendar_page.dart';
+import 'package:seed_finder/pages/home_page.dart';
+import 'package:seed_finder/pages/login_page.dart';
 import 'package:seed_finder/pages/survey_page.dart';
-
-import '../pages/calendar_page.dart';
-import '../pages/home_page.dart';
-import '../pages/login_page.dart';
-import 'is_signed_in_provider.dart';
+import 'package:seed_finder/providers/is_signed_in_provider.dart';
 
 part 'app_router_provider.g.dart';
 
@@ -20,7 +19,7 @@ GoRouter goRouter(GoRouterRef ref) {
     redirect: (context, state) {
       if (isSignedIn) {
         if (state.matchedLocation == '/') {
-          return "/survey";
+          return "/calendar";
         }
       } else {
         if (state.matchedLocation == '/') {
@@ -31,7 +30,7 @@ GoRouter goRouter(GoRouterRef ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => CalendarPage(),
+        builder: (context, state) => LoginPage(),
       ),
       GoRoute(
         path: "/home",

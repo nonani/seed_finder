@@ -1,19 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'logger.dart';
+import 'package:seed_finder/utils/logger.dart';
 
 class MainObserver extends ProviderObserver {
   const MainObserver();
 
-
   @override
-  void didUpdateProvider(
-      ProviderBase provider,
-      Object? previousValue,
-      Object? newValue,
-      ProviderContainer container)
-  {
+  void didUpdateProvider(ProviderBase provider, Object? previousValue,
+      Object? newValue, ProviderContainer container,) {
     logger.d('''
     {
       "provider": "${provider.name ?? provider.runtimeType}",
@@ -36,6 +30,5 @@ class MainObserver extends ProviderObserver {
       "value": "$error"
     }
     ''');
-
   }
 }

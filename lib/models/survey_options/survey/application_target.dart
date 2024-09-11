@@ -10,11 +10,9 @@ class ApplicationTarget with _$ApplicationTarget {
     required String name,
   }) = _ApplicationTarget;
 
-  factory ApplicationTarget.fromJson(Map<String, dynamic> json) => _$ApplicationTargetFromJson(json);
-
+  factory ApplicationTarget.fromJson(Map<String, dynamic> json) =>
+      _$ApplicationTargetFromJson(json);
 
   @override
   Map<String, dynamic> toJson();
-
-
 }

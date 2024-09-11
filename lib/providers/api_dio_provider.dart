@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:seed_finder/providers/auth_interceptor_provider.dart';
-import '../utils/dio.dart';
-import '../utils/env.dart';
-import '../utils/logger.dart';
+import 'package:seed_finder/utils/dio.dart';
+import 'package:seed_finder/utils/env.dart';
+import 'package:seed_finder/utils/logger.dart';
 
 
 part 'api_dio_provider.g.dart';

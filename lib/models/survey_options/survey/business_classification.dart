@@ -16,3 +16,4 @@
     @override
     Map<String, dynamic> toJson();
   }
+

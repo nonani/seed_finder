@@ -1,8 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
+import 'package:seed_finder/models/survey_options/survey/survey_options.dart';
 import 'package:seed_finder/providers/auth_client_provider.dart';
-
-import '../models/survey_options/survey/survey_options.dart';
 
 part 'survey_options_provider.g.dart';
 
