@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:seed_finder/providers/event_provider.dart';
 import 'package:seed_finder/utils/logger.dart';
+import 'package:seed_finder/widgets/event_list_tile.dart';
 import 'package:seed_finder/widgets/home_navigation_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -69,7 +70,7 @@ class CalendarPage extends HookConsumerWidget {
             icon: const Icon(Icons.favorite),
             onPressed: () {
               // 이벤트 추가
-              context.go("/favorite");
+              context.push("/favorite");
             },
           ),
           IconButton(
@@ -138,8 +139,6 @@ class CalendarPage extends HookConsumerWidget {
 
                   _focusedDay.value = format.parse(focusedDay.toString());
                   _selectedDay.value = format.parse(selectedDay.toString());
-
-                  logger.d(events[_selectedDay.toString()] ?? []);
                 },
                 headerStyle: const HeaderStyle(
                   titleCentered: true,
@@ -159,10 +158,7 @@ class CalendarPage extends HookConsumerWidget {
                   itemBuilder: (context, index) {
                     final event = events[DateFormat('yyyy-MM-dd')
                         .format(_selectedDay.value)]![index];
-                    return ListTile(
-                      title: Text(event.title),
-                      subtitle: Text(event.category),
-                    );
+                    return EventListTile(event: event);
                   },
                 ),
               ),

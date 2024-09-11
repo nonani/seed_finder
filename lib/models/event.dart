@@ -9,7 +9,7 @@ class Event with _$Event {
   factory Event({
     required int id,
     @JsonKey(name: "integrated_project_name") required String title,
-    @Default("defaultValue") String category,
+    @JsonKey(name: "business_classification_name") required String category,
     @JsonKey(name: "start_date") required DateTime startDate,
     @JsonKey(name: "end_date") required DateTime endDate,
   }) = _Event;

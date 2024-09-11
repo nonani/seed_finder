@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:seed_finder/models/event.dart';
 
+import 'package:seed_finder/models/event_detail.dart';
+
 part 'business_client.g.dart';
 
 @RestApi(baseUrl: '/business')
@@ -13,5 +15,5 @@ abstract class BusinessClient {
 
   //business/:businessId
   @GET('/{businessId}')
-  Future<Event> getEventDetail(@Path() String businessId);
+  Future<EventDetail> getEventDetail(@Path() int businessId);
 }

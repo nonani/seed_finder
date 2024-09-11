@@ -15,7 +15,7 @@ class HomeNavigationBar extends HookConsumerWidget {
           case 1:
             context.push("/survey");
           case 2:
-            context.push("/mypage");
+            context.push("/my-page");
         }
       },
       items: const [
