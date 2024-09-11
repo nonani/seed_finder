@@ -4,8 +4,8 @@ import 'access_token_provider.dart';
 
 part 'is_signed_in_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<bool> isSignedIn(IsSignedInRef ref) async {
-  final token = await ref.watch(accessTokenProvider.future);
-  return token != null;
+  return ref.watch(
+      accessTokenProvider.selectAsync((data) => data != null),);
 }

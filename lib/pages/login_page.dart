@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:seed_finder/models/user.dart';
 import 'package:seed_finder/providers/user_info_provider.dart';
-import 'package:seed_finder/utils/logger.dart';
 import 'package:seed_finder/utils/theme.dart';
-
-import '../models/user.dart';
-import '../widgets/LoginEditTextForm.dart';
+import 'package:seed_finder/widgets/LoginEditTextForm.dart';
 
 class LoginPage extends ConsumerWidget {
   LoginPage({super.key});
@@ -17,6 +15,7 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormState>();
     // final userInfo = ref.watch(userInfoProvider.notifier);
+
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -82,6 +81,9 @@ class LoginPage extends ConsumerWidget {
                   },
                   child: const Text("Login"),
                 ),
+                ElevatedButton(onPressed: (){
+                  ref.read(userInfoProvider.notifier).logout();
+                }, child: Text("logout"))
               ],
             ))
       ],

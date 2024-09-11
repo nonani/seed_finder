@@ -7,11 +7,11 @@ part 'access_token_provider.g.dart';
 
 const String _key = "access_token";
 
-@Riverpod(keepAlive: true)
+@riverpod
 class AccessToken extends _$AccessToken {
   @override
   Future<String?> build() async {
-    final storage = ref.read(storageProvider);
+    final storage = ref.watch(storageProvider);
     logger.d("AccessToken build");
     logger.d("AccessToken key: ${await storage.read(key: _key)}");
     return storage.read(key: _key);

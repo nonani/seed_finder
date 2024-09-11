@@ -13,7 +13,7 @@ const Color gray600 = Color(0xFF97989E);
 const Color gray100 = Color(0xFFEBECED);
 const Color white = Colors.white;
 const Color yellow = Color(0xFFFFBD35);
-const Color red = Color(0xFFFC4032);
+// const Color red = Color(0xFFFC4032);
 
 // TYPOGRAPHY
 

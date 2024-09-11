@@ -1,30 +1,25 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:seed_finder/providers/app_router_provider.dart';
 import 'package:seed_finder/providers/secure_storage_provider.dart';
 import 'package:seed_finder/utils/env.dart';
 import 'package:seed_finder/utils/provider_observer.dart';
 import 'package:seed_finder/utils/theme.dart';
 
-import 'models/business_experience_range.dart';
-import 'models/region.dart';
-import 'models/survey.dart';
-
-
-
-void main() async{
+void main() async {
   await loadEnv(); //
+  WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize date formatting with a specific locale
   runApp(
     ProviderScope(
       observers: [MainObserver()],
       child: MyApp(),
     ),
   );
-
 }
 
 class MyApp extends ConsumerWidget {

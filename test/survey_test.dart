@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seed_finder/models/business_experience_range.dart';
 import 'package:seed_finder/models/region.dart';
-import 'package:seed_finder/models/survey.dart';
+import 'package:seed_finder/models/survey_form_data.dart';
 import 'dart:convert';
 
 void main() {
