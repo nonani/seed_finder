@@ -11,7 +11,7 @@ class HomeNavigationBar extends HookConsumerWidget {
       onTap: (value) {
         switch (value) {
           case 0:
-            context.push("/business_plan");
+            context.push("/business-plan");
           case 1:
             context.push("/survey");
           case 2:

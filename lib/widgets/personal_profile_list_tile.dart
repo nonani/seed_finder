@@ -26,8 +26,6 @@ class PersonalProfileListTile extends ConsumerWidget {
     //   orElse: () => "",
     // );
 
-    const url =
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
     const name = "John Doe";
     const email = "date.email";
 
@@ -35,7 +33,7 @@ class PersonalProfileListTile extends ConsumerWidget {
       onTap: () => ref.read(userInfoProvider.notifier).logout(),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       leading: CdnImage.circle(
-        url,
+        null,
         dimension: 72,
         fallback: const Icon(Icons.person, size: 36),
       ),

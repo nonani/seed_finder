@@ -23,4 +23,8 @@ abstract class AuthClient {
 
   @GET('/option')
   Future<SurveyOptions> getOptions();
+
+  //설문에 참여한 유저인지 체크
+  @GET('/check')
+  Future<Map<String, bool>> checkSurvey();
 }

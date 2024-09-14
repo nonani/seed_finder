@@ -40,7 +40,7 @@ class CdnImage extends StatelessWidget {
         ? fallback
         : Image.network(
             //TODO: Replace with actual CDN URL
-            "https://avatars.githubusercontent.com/u/30969164?s=96&v=4",
+            src,
             fit: fit,
             errorBuilder: (context, error, stackTrace) => fallback,
           );
