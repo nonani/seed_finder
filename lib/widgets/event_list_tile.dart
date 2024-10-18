@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import 'package:seed_finder/models/event.dart';
-import 'package:seed_finder/pages/calendar_page.dart';
 import 'package:seed_finder/widgets/favorite_toggle_button.dart';
 
 class EventListTile extends StatelessWidget {

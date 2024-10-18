@@ -51,6 +51,9 @@ class SurveyForm extends _$SurveyForm {
 
   Future<void> submit() async {
     final surveyClient = await ref.read(authClientProvider.future);
+    if(!_enabled) {
+      return;
+    }
     return await surveyClient.create(
       body: SurveyCreateBody(
         businessCategory: state.businessCategory,

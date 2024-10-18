@@ -4,7 +4,6 @@ import 'package:seed_finder/models/document_overview.dart';
 import 'package:seed_finder/utils/formats.dart';
 import 'package:seed_finder/utils/theme.dart';
 import 'package:seed_finder/utils/utils.dart';
-import 'package:seed_finder/widgets/cdn_image.dart';
 
 class ChatListTile extends StatelessWidget {
   final DocumentOverview doc;

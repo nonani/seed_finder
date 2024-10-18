@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:seed_finder/providers/event_provider.dart';
-import 'package:seed_finder/utils/logger.dart';
 import 'package:seed_finder/widgets/event_list_tile.dart';
 import 'package:seed_finder/widgets/home_navigation_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -15,9 +14,9 @@ class CalendarPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final events = ref.watch(eventsProvider);
-    final _focusedDay = useState(DateTime.now());
-    final _selectedDay = useState(DateTime.now());
-    final _caledarFormat = useState(CalendarFormat.month);
+    final focusedDay = useState(DateTime.now());
+    final selectedDay = useState(DateTime.now());
+    final caledarFormat = useState(CalendarFormat.month);
 
     final months = List.generate(12, (index) {
       return DateFormat('MMMM').format(DateTime(0, index + 1)); // 1월 ~ 12월
@@ -37,18 +36,18 @@ class CalendarPage extends HookConsumerWidget {
         ),
         title: // DropdownButton for month selection
             DropdownButton<String>(
-          value: DateFormat('MMMM').format(_focusedDay.value),
+          value: DateFormat('MMMM').format(focusedDay.value),
           icon: const Icon(Icons.arrow_drop_down),
           underline: const SizedBox(),
           // Remove underline
           onChanged: (newMonth) {
             if (newMonth != null) {
               final newDate = DateTime(
-                _focusedDay.value.year,
+                focusedDay.value.year,
                 months.indexOf(newMonth) + 1,
-                _focusedDay.value.day,
+                focusedDay.value.day,
               );
-              _focusedDay.value = newDate;
+              focusedDay.value = newDate;
             }
           },
           items: months.map((month) {
@@ -62,7 +61,7 @@ class CalendarPage extends HookConsumerWidget {
           IconButton(
             onPressed: () {
               // 이벤트 추가
-              _focusedDay.value = DateTime.now();
+              focusedDay.value = DateTime.now();
             },
             icon: const Icon(Icons.today_rounded),
           ),
@@ -76,7 +75,7 @@ class CalendarPage extends HookConsumerWidget {
           IconButton(
             onPressed: () {
               // 새로고침
-              ref.refresh(eventsProvider);
+              ref.invalidate(eventsProvider);
               //snackbar 출력
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -101,21 +100,21 @@ class CalendarPage extends HookConsumerWidget {
             ListTile(
               title: const Text('month'),
               onTap: () {
-                _caledarFormat.value = CalendarFormat.month;
+                caledarFormat.value = CalendarFormat.month;
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: const Text('week'),
               onTap: () {
-                _caledarFormat.value = CalendarFormat.week;
+                caledarFormat.value = CalendarFormat.week;
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: const Text('two weeks'),
               onTap: () {
-                _caledarFormat.value = CalendarFormat.twoWeeks;
+                caledarFormat.value = CalendarFormat.twoWeeks;
                 Navigator.pop(context);
               },
             ),
@@ -127,18 +126,18 @@ class CalendarPage extends HookConsumerWidget {
           return Column(
             children: [
               TableCalendar(
-                calendarFormat: _caledarFormat.value,
-                focusedDay: _focusedDay.value,
+                calendarFormat: caledarFormat.value,
+                focusedDay: focusedDay.value,
                 firstDay: DateTime.utc(2010, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
                 selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay.value, day);
+                  return isSameDay(selectedDay.value, day);
                 },
-                onDaySelected: (selectedDay, focusedDay) {
+                onDaySelected: (selected, focused) {
                   final format = DateFormat('yyyy-MM-dd');
 
-                  _focusedDay.value = format.parse(focusedDay.toString());
-                  _selectedDay.value = format.parse(selectedDay.toString());
+                  focusedDay.value = format.parse(focused.toString());
+                  selectedDay.value = format.parse(selected.toString());
                 },
                 headerStyle: const HeaderStyle(
                   titleCentered: true,
@@ -152,12 +151,12 @@ class CalendarPage extends HookConsumerWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount: events[DateFormat('yyyy-MM-dd')
-                              .format(_selectedDay.value)]
+                              .format(selectedDay.value)]
                           ?.length ??
                       0,
                   itemBuilder: (context, index) {
                     final event = events[DateFormat('yyyy-MM-dd')
-                        .format(_selectedDay.value)]![index];
+                        .format(selectedDay.value)]![index];
                     return EventListTile(event: event);
                   },
                 ),

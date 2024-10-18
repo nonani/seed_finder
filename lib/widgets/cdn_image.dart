@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../utils/theme.dart';
+import 'package:seed_finder/utils/theme.dart';
 
 class CdnImage extends StatelessWidget {
   final String? src;

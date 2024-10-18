@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../utils/theme.dart';
-import '../widgets/personal_list_tile.dart';
-import '../widgets/personal_profile_list_tile.dart';
+import 'package:seed_finder/utils/theme.dart';
+import 'package:seed_finder/widgets/personal_list_tile.dart';
+import 'package:seed_finder/widgets/personal_profile_list_tile.dart';
 
 class PersonalPage extends StatelessWidget {
   const PersonalPage({super.key});

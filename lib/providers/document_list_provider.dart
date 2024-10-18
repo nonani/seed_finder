@@ -1,12 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
+import 'package:seed_finder/models/document_create_body.dart';
 import 'package:seed_finder/models/document_overview.dart';
-import 'package:seed_finder/models/message.dart';
-
 import 'package:seed_finder/providers/document_client_provider.dart';
-import 'package:seed_finder/utils/logger.dart';
-
-import '../models/document_create_body.dart';
 
 part 'document_list_provider.g.dart';
 
@@ -20,7 +15,11 @@ class DocList extends _$DocList {
 
   //add document
   Future<void> addDocument(
-      String title, String message, String token, String numberingId) async {
+    String title,
+    String message,
+    String token,
+    String numberingId,
+  ) async {
     final chatroomClient = await ref.watch(documentClientProvider.future);
     return await chatroomClient.createChatroom(
       DocumentCreateBody(

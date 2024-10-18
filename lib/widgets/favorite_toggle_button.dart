@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:seed_finder/providers/is_wish_listed_provider.dart';
+import 'package:seed_finder/providers/wish_list_ids_provider.dart';
 import 'package:seed_finder/utils/theme.dart';
-import '../providers/is_wish_listed_provider.dart';
-import '../providers/wish_list_ids_provider.dart';
 
 class FavoriteToggleButton extends ConsumerStatefulWidget {
   final int eventId;

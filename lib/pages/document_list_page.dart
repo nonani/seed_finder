@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:seed_finder/providers/document_list_provider.dart';
-import 'package:seed_finder/providers/document_client_provider.dart';
 import 'package:seed_finder/utils/logger.dart';
 import 'package:seed_finder/widgets/chat_list_tile.dart';
 import 'package:seed_finder/widgets/list_status_widget.dart';
@@ -28,7 +27,7 @@ class DocListPage extends ConsumerWidget {
       "3-3-4": "자금 필요성 및 조달계획",
       "4-1-1": "대표자(팀) 현황",
       "4-1-2": "외부 협력 현황 및 활용 방안",
-      "4-2": "중장기 사회적 가치 도입계획"
+      "4-2": "중장기 사회적 가치 도입계획",
     };
 
     const emptyWidget = EmptyListWidget(
@@ -56,7 +55,12 @@ class DocListPage extends ConsumerWidget {
                   // 삭제할 로직 구현
                   ref.read(docListProvider.notifier).remove(chat.documentId);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${chat.title}이(가) 삭제되었습니다.',), duration: const Duration(milliseconds: 500),),
+                    SnackBar(
+                      content: Text(
+                        '${chat.title}이(가) 삭제되었습니다.',
+                      ),
+                      duration: const Duration(milliseconds: 500),
+                    ),
                   );
                 },
                 background: Container(
@@ -149,7 +153,7 @@ class DocListPage extends ConsumerWidget {
                             // 스크롤 비활성화
                             itemCount: labels.length,
                             separatorBuilder: (context, index) =>
-                            const SizedBox(height: 10),
+                                const SizedBox(height: 10),
                             itemBuilder: (context, index) {
                               return ListTile(
                                 title: Text(
@@ -162,7 +166,8 @@ class DocListPage extends ConsumerWidget {
                                 onTap: () async {
                                   try {
                                     final keys = labels.keys.toList();
-                                    context.push("/docs-create?id=${keys[index]}");
+                                    context
+                                        .push("/docs-create?id=${keys[index]}");
                                   } catch (e) {
                                     logger.e(e);
                                   }

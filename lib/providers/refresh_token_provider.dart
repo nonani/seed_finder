@@ -1,12 +1,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:seed_finder/providers/secure_storage_provider.dart';
 
-part 'access_token_provider.g.dart';
+part 'refresh_token_provider.g.dart';
 
-const String _key = "access_token";
+const String _key = "refresh_token";
 
 @riverpod
-class AccessToken extends _$AccessToken {
+class RefreshToken extends _$RefreshToken {
   @override
   Future<String?> build() async {
     final storage = ref.watch(storageProvider);

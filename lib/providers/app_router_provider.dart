@@ -1,13 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:seed_finder/pages/calendar_page.dart';
+import 'package:seed_finder/pages/create_document_page.dart';
 import 'package:seed_finder/pages/document_detail_page.dart';
 import 'package:seed_finder/pages/document_list_page.dart';
-import 'package:seed_finder/pages/create_document_page.dart';
 import 'package:seed_finder/pages/event_detail_page.dart';
 import 'package:seed_finder/pages/favorite_page.dart';
-import 'package:seed_finder/pages/login_page.dart';
 import 'package:seed_finder/pages/personal_page.dart';
+import 'package:seed_finder/pages/sign_in_page.dart';
 import 'package:seed_finder/pages/survey_page.dart';
 import 'package:seed_finder/providers/is_signed_in_provider.dart';
 import 'package:seed_finder/providers/survey_check_provider.dart';
@@ -41,11 +41,12 @@ GoRouter goRouter(GoRouterRef ref) {
         }
         return null;
       }
+      return null;
     },
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => LoginPage(),
+        builder: (context, state) => const SignInPage(),
       ),
       GoRoute(
         path: "/home",
@@ -74,15 +75,16 @@ GoRouter goRouter(GoRouterRef ref) {
         builder: (context, state) => const DocListPage(),
       ),
       GoRoute(
-          path: "/docs-create",
-          builder: (context, state) {
-            final numberingId = state.uri.queryParameters["id"];
-            return CreateDocumentPage(numberingId: numberingId ?? "");
-          }),
+        path: "/docs-create",
+        builder: (context, state) {
+          final numberingId = state.uri.queryParameters["id"];
+          return CreateDocumentPage(numberingId: numberingId ?? "");
+        },
+      ),
       GoRoute(
         path: "/docs-detail/:documentId",
         builder: (context, state) => DocDetailPage(
-          documentId : int.parse(state.pathParameters["documentId"]!),
+          documentId: int.parse(state.pathParameters["documentId"]!),
         ),
       ),
     ],

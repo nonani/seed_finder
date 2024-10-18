@@ -1,8 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:seed_finder/providers/access_token_provider.dart';
 import 'package:seed_finder/providers/auth_client_provider.dart';
-import 'package:seed_finder/providers/user_info_provider.dart';
 
 part 'survey_check_provider.g.dart';
 

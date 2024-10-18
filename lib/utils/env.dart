@@ -4,7 +4,8 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> loadEnv() async {
-  await dotenv.load(fileName: '.env'); // .env 파일 로드
+  await dotenv.load(); // .env 파일 로드
 }
 
 String? get baseUrl => dotenv.env['BASE_URL'];
+String? get kakaoNativeAppKey => dotenv.env['KAKAO_NATIVE_APP_KEY'];

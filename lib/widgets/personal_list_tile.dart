@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../utils/theme.dart';
+import 'package:seed_finder/utils/theme.dart';
 
 class PersonalListTile extends HookWidget {
   final GestureTapCallback? onTap;

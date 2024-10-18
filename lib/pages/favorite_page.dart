@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:seed_finder/providers/wishlist_provider.dart';
+import 'package:seed_finder/utils/theme.dart';
 import 'package:seed_finder/widgets/event_list_tile.dart';
-
-import '../providers/wishlist_provider.dart';
-import '../utils/theme.dart';
-import '../widgets/list_status_widget.dart';
+import 'package:seed_finder/widgets/list_status_widget.dart';
 
 class FavoritePage extends ConsumerStatefulWidget {
   const FavoritePage({super.key});

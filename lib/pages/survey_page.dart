@@ -34,12 +34,14 @@ class SurveyPage extends ConsumerWidget {
           surveyNotifier.incrementIndex();
         } else {
           surveyNotifier.submit().then((_) {
-            ScaffoldMessenger.of(ref.context).showSnackBar(
-              const SnackBar(content: Text('Survey submitted successfully!')),
-            );
-            Future.delayed(const Duration(seconds: 1), () {
-              ref.read(goRouterProvider).go('/calendar');
-            });
+            if (ref.context.mounted) {
+              ScaffoldMessenger.of(ref.context).showSnackBar(
+                const SnackBar(content: Text('Survey submitted successfully!')),
+              );
+              Future.delayed(const Duration(seconds: 1), () {
+                ref.read(goRouterProvider).go('/calendar');
+              });
+            }
           });
         }
       },

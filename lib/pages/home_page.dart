@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:seed_finder/providers/user_info_provider.dart';
+import 'package:seed_finder/providers/auth_state_provider.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -12,8 +12,8 @@ class HomePage extends ConsumerWidget {
         children: [
           ElevatedButton(
             onPressed: () async {
-              final userInfo = ref.watch(userInfoProvider.notifier);
-              userInfo.logout();
+              final userInfo = ref.watch(authStateProvider.notifier);
+              userInfo.signOut();
             },
             child: const Text("Logout"),
           ),

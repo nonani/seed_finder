@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:seed_finder/providers/user_info_provider.dart';
+import 'package:seed_finder/providers/auth_state_provider.dart';
 import 'package:seed_finder/utils/theme.dart';
 import 'package:seed_finder/widgets/cdn_image.dart';
 import 'package:seed_finder/widgets/personal_list_tile.dart';
@@ -30,7 +30,7 @@ class PersonalProfileListTile extends ConsumerWidget {
     const email = "date.email";
 
     return PersonalListTile(
-      onTap: () => ref.read(userInfoProvider.notifier).logout(),
+      onTap: () => ref.read(authStateProvider.notifier).signOut(),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       leading: CdnImage.circle(
         null,
