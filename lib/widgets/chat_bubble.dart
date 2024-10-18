@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:seed_finder/providers/chatroom_provider.dart';
+import 'package:seed_finder/providers/document_provider.dart';
 import 'package:seed_finder/utils/formats.dart';
 import 'package:seed_finder/utils/theme.dart';
 import 'package:seed_finder/utils/utils.dart';

@@ -1,8 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:seed_finder/pages/calendar_page.dart';
-import 'package:seed_finder/pages/chat_list_page.dart';
-import 'package:seed_finder/pages/chat_page.dart';
+import 'package:seed_finder/pages/document_detail_page.dart';
+import 'package:seed_finder/pages/document_list_page.dart';
+import 'package:seed_finder/pages/create_document_page.dart';
 import 'package:seed_finder/pages/event_detail_page.dart';
 import 'package:seed_finder/pages/favorite_page.dart';
 import 'package:seed_finder/pages/login_page.dart';
@@ -70,12 +71,18 @@ GoRouter goRouter(GoRouterRef ref) {
       ),
       GoRoute(
         path: "/business-plan",
-        builder: (context, state) => const ChatListPage(),
+        builder: (context, state) => const DocListPage(),
       ),
       GoRoute(
-        path: "/chats/:chatroomId",
-        builder: (context, state) => ChatPage(
-          chatroomId: int.parse(state.pathParameters["chatroomId"]!),
+          path: "/docs-create",
+          builder: (context, state) {
+            final numberingId = state.uri.queryParameters["id"];
+            return CreateDocumentPage(numberingId: numberingId ?? "");
+          }),
+      GoRoute(
+        path: "/docs-detail/:documentId",
+        builder: (context, state) => DocDetailPage(
+          documentId : int.parse(state.pathParameters["documentId"]!),
         ),
       ),
     ],

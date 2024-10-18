@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:seed_finder/providers/chat_list_provider.dart';
+import 'package:seed_finder/providers/document_list_provider.dart';
+import 'package:seed_finder/providers/document_client_provider.dart';
+import 'package:seed_finder/utils/logger.dart';
 import 'package:seed_finder/widgets/chat_list_tile.dart';
 import 'package:seed_finder/widgets/list_status_widget.dart';
 
-class ChatListPage extends ConsumerWidget {
-  const ChatListPage({super.key});
+class DocListPage extends ConsumerWidget {
+  const DocListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chatList = ref.watch(chatListProvider);
+    final chatList = ref.watch(docListProvider);
 
-    final List<String> items = [
-      "1-1. 창업아이템 배경 및 필요성",
-      "1-2. 창업아이템 목표시장(고객) 현황 분석",
-      "2-1. 창업아이템 현황(준비 정도)",
-      "2-2. 창업아이템 실현 및 구체화 방안",
-      "3-1. 창업아이템 비즈니스 모델",
-      "3-2. 창업아이템 사업화 추진 전략",
-      "3-3-1. 사업 전체 로드맵",
-      "3-3-2. 협약기간 내 목표 및 달성 방안",
-      "3-3-3. 정부지원사업비 집행계획",
-      "3-3-4. 자금 필요성 및 조달계획",
-      "4-1-1. 대표자(팀) 현황",
-      "4-1-2. 외부 협력 현황 및 활용 방안",
-      "4-2. 중장기 사회적 가치 도입계획"
-    ];
+    final Map<String, String> labels = {
+      "1-1": "창업아이템 배경 및 필요성",
+      "1-2": "창업아이템 목표시장(고객) 현황 분석",
+      "2-1": "창업아이템 현황(준비 정도)",
+      "2-2": "창업아이템 실현 및 구체화 방안",
+      "3-1": "창업아이템 비즈니스 모델",
+      "3-2": "창업아이템 사업화 추진 전략",
+      "3-3-1": "사업 전체 로드맵",
+      "3-3-2": "협약기간 내 목표 및 달성 방안",
+      "3-3-3": "정부지원사업비 집행계획",
+      "3-3-4": "자금 필요성 및 조달계획",
+      "4-1-1": "대표자(팀) 현황",
+      "4-1-2": "외부 협력 현황 및 활용 방안",
+      "4-2": "중장기 사회적 가치 도입계획"
+    };
 
     const emptyWidget = EmptyListWidget(
       title: "AI 대화 중인 사업계획서 작성이 없습니다",
@@ -46,7 +49,24 @@ class ChatListPage extends ConsumerWidget {
             separatorBuilder: (context, index) => const SizedBox(height: 10),
             itemBuilder: (context, index) {
               final chat = data[index];
-              return ChatListTile(chat);
+              return Dismissible(
+                key: ValueKey(chat.documentId),
+                direction: DismissDirection.endToStart,
+                onDismissed: (direction) {
+                  // 삭제할 로직 구현
+                  ref.read(docListProvider.notifier).remove(chat.documentId);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('${chat.title}이(가) 삭제되었습니다.',), duration: const Duration(milliseconds: 500),),
+                  );
+                },
+                background: Container(
+                  color: Colors.red,
+                  alignment: Alignment.centerRight,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Icon(Icons.delete, color: Colors.white),
+                ),
+                child: ChatListTile(doc: chat, index: index + 1),
+              );
             },
           ),
         );
@@ -80,10 +100,11 @@ class ChatListPage extends ConsumerWidget {
               ],
             ),
             DraggableScrollableSheet(
-              controller: draggableController, // 컨트롤러 연결
+              controller: draggableController,
+              // 컨트롤러 연결
               initialChildSize: 0.1,
               minChildSize: 0.1,
-              maxChildSize: 0.5,
+              maxChildSize: 0.7,
               builder: (context, scrollController) {
                 return GestureDetector(
                   // 바텀시트 내부에서는 onTap이 전파되지 않도록
@@ -122,22 +143,30 @@ class ChatListPage extends ConsumerWidget {
                           ),
                           const SizedBox(height: 50),
                           ListView.separated(
-                            shrinkWrap: true, // 내부 스크롤 허용
-                            physics:
-                                const NeverScrollableScrollPhysics(), // 스크롤 비활성화
-                            itemCount: items.length,
+                            shrinkWrap: true,
+                            // 내부 스크롤 허용
+                            physics: const NeverScrollableScrollPhysics(),
+                            // 스크롤 비활성화
+                            itemCount: labels.length,
                             separatorBuilder: (context, index) =>
-                                const SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             itemBuilder: (context, index) {
                               return ListTile(
                                 title: Text(
-                                  items[index],
+                                  "${labels.keys.toList()[index]} ${labels[labels.keys.toList()[index]]}",
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,
                                   ),
                                 ),
-                                onTap: () {
+                                onTap: () async {
+                                  try {
+                                    final keys = labels.keys.toList();
+                                    context.push("/docs-create?id=${keys[index]}");
+                                  } catch (e) {
+                                    logger.e(e);
+                                  }
+
                                   // 각 항목을 클릭했을 때 실행할 동작
                                 },
                               );

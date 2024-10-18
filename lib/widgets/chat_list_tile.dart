@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seed_finder/models/chatroom_overview.dart';
+import 'package:seed_finder/models/document_overview.dart';
 import 'package:seed_finder/utils/formats.dart';
 import 'package:seed_finder/utils/theme.dart';
 import 'package:seed_finder/utils/utils.dart';
 import 'package:seed_finder/widgets/cdn_image.dart';
 
 class ChatListTile extends StatelessWidget {
-  final ChatroomOverview chat;
+  final DocumentOverview doc;
+  final int index;
 
-  const ChatListTile(
-    this.chat, {
+  const ChatListTile({required this.index,
+    required this.doc,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final message = chat.lastMessage ?? "";
-    final createdAt = chat.lastMessageCreatedAt.andThen(recent.format) ?? "";
+    final message = doc.ideaMessage ?? "";
+    final createdAt = doc.createdAt.andThen(recent.format) ?? "";
 
     return GestureDetector(
-      onTap: () => context.push("/chats/${chat.id}"),
+      onTap: () => context.push("/docs-detail/${doc.documentId}"),
       behavior: HitTestBehavior.opaque,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: [
-            CdnImage.circle(
-              Icons.person.toString(),
-              dimension: 54,
-              boxShadow: boxShadow,
-              fallback: const Icon(Icons.person, size: 28),
-            ),
+
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -39,11 +35,11 @@ class ChatListTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(chat.numberingId, style: titleSmall),
-                      const SizedBox(width: 4),
+                      Text("#$index", style: titleSmall),
+                      const SizedBox(width: 8),
                       Text(
-                        chat.title,
-                        style: bodySmall.copyWith(color: gray600),
+                        doc.title,
+                        style: titleLarge.copyWith(color: gray600),
                       ),
                       const Spacer(),
                       Text(
@@ -63,23 +59,6 @@ class ChatListTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        if (chat.unreadMessageCount > 0) ...[
-                          const SizedBox(width: 18),
-                          Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
-                            constraints: const BoxConstraints(minWidth: 18),
-                            decoration: const ShapeDecoration(
-                              color: blue500,
-                              shape: StadiumBorder(),
-                            ),
-                            child: Text(
-                              count.format(chat.unreadMessageCount),
-                              style: captionSmall.copyWith(color: white),
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                        ],
                       ],
                     ),
                   ),
