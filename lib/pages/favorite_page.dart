@@ -69,7 +69,7 @@ class _FavoritePageState extends ConsumerState<FavoritePage> {
             Navigator.pop(context);
           },
         ),
-        title: const Text("하트"),
+        title: const Text("찜한 사업 정보"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

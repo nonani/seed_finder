@@ -49,7 +49,7 @@ class PersonalPage extends ConsumerWidget {
             onTap: () {
               context.push('/favorite');
             },
-            title: const Text("저장한 사업 정보"),
+            title: const Text("찜한 사업 정보"),
             leading: const Icon(Icons.favorite),
             trailing: const Icon(Icons.chevron_right),
           ),
@@ -78,3 +78,5 @@ class PersonalPage extends ConsumerWidget {
     );
   }
 }
+
+
