@@ -72,19 +72,7 @@ class CalendarPage extends HookConsumerWidget {
               context.push("/favorite");
             },
           ),
-          IconButton(
-            onPressed: () {
-              // 새로고침
-              ref.invalidate(eventsProvider);
-              //snackbar 출력
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Refreshed'),
-                ),
-              );
-            },
-            icon: const Icon(Icons.refresh),
-          ),
+
         ],
       ),
       drawer: Drawer(

@@ -27,33 +27,36 @@ class SurveyForm extends _$SurveyForm {
   void setBusinessCategory(List<String> businessCategory) {
     state = state.copyWith(businessCategory: businessCategory);
     state = state.copyWith(visited: state.visited..[0] = true);
+    state = state.copyWith(enabled: _enabled);
   }
 
   void setBusinessApply(List<String> businessApply) {
     state = state.copyWith(businessApply: businessApply);
     state = state.copyWith(visited: state.visited..[1] = true);
+    state = state.copyWith(enabled: _enabled);
   }
 
   void setBusinessRegion(List<String> businessRegion) {
     state = state.copyWith(businessRegion: businessRegion);
     state = state.copyWith(visited: state.visited..[2] = true);
+    state = state.copyWith(enabled: _enabled);
   }
 
   void setBusinessTargetAge(int businessTargetAge) {
     state = state.copyWith(businessTargetAge: businessTargetAge);
     state = state.copyWith(visited: state.visited..[3] = true);
+    state = state.copyWith(enabled: _enabled);
   }
 
   void setBusinessExperience(int businessExperience) {
     state = state.copyWith(businessExperience: businessExperience);
     state = state.copyWith(visited: state.visited..[4] = true);
+    state = state.copyWith(enabled: _enabled);
   }
 
   Future<void> submit() async {
     final surveyClient = await ref.read(authClientProvider.future);
-    if(!_enabled) {
-      return;
-    }
+
     return await surveyClient.create(
       body: SurveyCreateBody(
         businessCategory: state.businessCategory,

@@ -12,7 +12,7 @@ Interceptor authInterceptor(AuthInterceptorRef ref) {
     onRequest: (options, handler) async {
       final accessToken = await ref.read(accessTokenProvider.future);
       if (accessToken != null) {
-        options.headers["Authorization"] = "Bearer $accessToken";
+        options.headers["Authorization"] = accessToken;
       }
 
       return handler.next(options);

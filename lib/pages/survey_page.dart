@@ -32,18 +32,25 @@ class SurveyPage extends ConsumerWidget {
       onStepContinue: () {
         if (surveyForm.id < surveyOptions.question.length - 1) {
           surveyNotifier.incrementIndex();
-        } else {
+        }
+        else if (surveyForm.enabled){
           surveyNotifier.submit().then((_) {
             if (ref.context.mounted) {
               ScaffoldMessenger.of(ref.context).showSnackBar(
                 const SnackBar(content: Text('Survey submitted successfully!')),
               );
               Future.delayed(const Duration(seconds: 1), () {
-                ref.read(goRouterProvider).go('/calendar');
+                ref.read(goRouterProvider).go('/');
               });
             }
           });
         }
+        else {
+          ScaffoldMessenger.of(ref.context).showSnackBar(
+            const SnackBar(content: Text('모든 항목의 설문에 참여해주세요!!')),
+          );
+        }
+
       },
       onStepCancel: () {
         if (surveyForm.id > 0) {
@@ -113,7 +120,8 @@ class SurveyPage extends ConsumerWidget {
               labelText: surveyOptions.question[3],
             ),
             onChanged: (value) {
-              surveyNotifier.setBusinessExperience(int.tryParse(value) ?? 0);
+              surveyNotifier.setBusinessTargetAge(int.tryParse(value) ?? 0);
+
             },
           ),
         ),
@@ -131,7 +139,7 @@ class SurveyPage extends ConsumerWidget {
               labelText: surveyOptions.question[4],
             ),
             onChanged: (value) {
-              surveyNotifier.setBusinessTargetAge(int.tryParse(value) ?? 0);
+              surveyNotifier.setBusinessExperience(int.tryParse(value) ?? 0);
             },
           ),
         ),

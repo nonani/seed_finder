@@ -1,4 +1,3 @@
-
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
@@ -12,6 +11,8 @@ import 'package:seed_finder/providers/oauth2_client_provider.dart';
 import 'package:seed_finder/providers/refresh_token_provider.dart';
 import 'package:seed_finder/providers/uuid_provider.dart';
 import 'package:seed_finder/utils/logger.dart';
+
+import 'auth_client_provider.dart';
 
 part 'auth_state_provider.g.dart';
 
@@ -54,6 +55,13 @@ class AuthState extends _$AuthState {
     await ref.read(accessTokenProvider.notifier).clear();
     await ref.read(refreshTokenProvider.notifier).clear();
   }
+
+  Future<void> deleteUser() async {
+    final authClient = await ref.read(authClientProvider.future);
+    await authClient.delete();
+    await signOut();
+  }
+
 }
 
 sealed class OAuth2Provider {
@@ -73,7 +81,8 @@ class GoogleOAuth2Provider extends OAuth2Provider {
   Future<String?> getToken() async {
     final scopes = [
       "https://www.googleapis.com/auth/userinfo.email",
-      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/user.phonenumbers.read",
+      "https://www.googleapis.com/auth/user.gender.read",
     ];
 
     try {

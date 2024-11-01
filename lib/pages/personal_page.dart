@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seed_finder/providers/auth_state_provider.dart';
 
 import 'package:seed_finder/utils/theme.dart';
 import 'package:seed_finder/widgets/personal_list_tile.dart';
 import 'package:seed_finder/widgets/personal_profile_list_tile.dart';
 
-class PersonalPage extends StatelessWidget {
+class PersonalPage extends ConsumerWidget {
   const PersonalPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -59,8 +61,11 @@ class PersonalPage extends StatelessWidget {
             ),
           ),
           PersonalListTile(
-            onTap: () {},
-            title: const Text("기능 2"),
+            onTap: () async {
+              await ref.watch(authStateProvider.notifier).deleteUser();
+
+            },
+            title: const Text("회원 탈퇴"),
             leading: const Icon(Icons.account_balance_rounded),
             trailing: const Icon(Icons.chevron_right),
           ),

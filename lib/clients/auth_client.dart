@@ -21,4 +21,8 @@ abstract class AuthClient {
   @GET('/check')
   Future<Map<String, bool>> checkSurvey();
 
+  @DELETE('/delete')
+  Future<void> delete();
+
+
 }

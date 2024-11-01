@@ -29,10 +29,26 @@ class SignInButton extends ConsumerWidget {
           await ref.read(authStateProvider.notifier).signIn(provider);
           logger.d("signed in");
 
+
+
           if (!context.mounted) return;
           context.go("/");
         } on TokenIssuanceException catch (e, s) {
           logger.d("failed to sign in", error: e, stackTrace: s);
+          //snackbar 띄우기
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.toString()),
+              duration: Duration(seconds: 10), // 스낵바 표시 시간
+              action: SnackBarAction(
+                label: '확인',
+                onPressed: () {
+                  // 스낵바 액션 버튼을 눌렀을 때의 처리
+                },
+              ),
+            ),
+          );
+
         }
       },
       child: Container(
