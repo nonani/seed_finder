@@ -80,9 +80,9 @@ class GoogleOAuth2Provider extends OAuth2Provider {
   @override
   Future<String?> getToken() async {
     final scopes = [
+      "https://www.googleapis.com/auth/userinfo.profile",
       "https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/user.phonenumbers.read",
-      "https://www.googleapis.com/auth/user.gender.read",
     ];
 
     try {

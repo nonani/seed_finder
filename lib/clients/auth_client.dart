@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:seed_finder/models/profile.dart';
 import 'package:seed_finder/models/survey_options/survey/survey_create_body.dart';
 import 'package:seed_finder/models/survey_options/survey/survey_options.dart';
 
@@ -23,6 +24,9 @@ abstract class AuthClient {
 
   @DELETE('/delete')
   Future<void> delete();
+
+  @GET('/profile')
+  Future<Profile> getProfile();
 
 
 }

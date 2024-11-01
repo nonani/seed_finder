@@ -20,6 +20,9 @@ class PersonalPage extends ConsumerWidget {
             context.pop();
           },
         ),
+        actions: [
+          IconButton(onPressed: ()=>ref.read(authStateProvider.notifier).signOut(), icon: const Icon(Icons.logout))
+        ],
         title: const Text("마이페이지"),
       ),
       body: Column(
@@ -42,11 +45,12 @@ class PersonalPage extends ConsumerWidget {
               ),
             ),
           ),
-          //TODO: PersonalListTile 수정
           PersonalListTile(
-            onTap: () {},
-            title: const Text("기능 1"),
-            leading: const Icon(Icons.account_balance_rounded),
+            onTap: () {
+              context.push('/favorite');
+            },
+            title: const Text("저장한 사업 정보"),
+            leading: const Icon(Icons.favorite),
             trailing: const Icon(Icons.chevron_right),
           ),
           const Padding(
@@ -66,7 +70,7 @@ class PersonalPage extends ConsumerWidget {
 
             },
             title: const Text("회원 탈퇴"),
-            leading: const Icon(Icons.account_balance_rounded),
+            leading: const Icon(Icons.person_remove),
             trailing: const Icon(Icons.chevron_right),
           ),
         ],
