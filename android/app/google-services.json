@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:894080515848:android:45890f614d311b035f76bd",
+        "mobilesdk_app_id": "1:894080515848:android:9840ec0ccfb300e25f76bd",
         "android_client_info": {
-          "package_name": "com.example.seed_finder"
+          "package_name": "com.konkuk.seedfinder"
         }
       },
       "oauth_client": [],

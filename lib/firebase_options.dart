@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,9 +28,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -40,19 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDf9lreN2eFpw4y6tI7pEPCaLjlR4g3kwM',
-    appId: '1:894080515848:web:6f096d050a0b1a2f5f76bd',
-    messagingSenderId: '894080515848',
-    projectId: 'seedfinder-23b19',
-    authDomain: 'seedfinder-23b19.firebaseapp.com',
-    storageBucket: 'seedfinder-23b19.appspot.com',
-    measurementId: 'G-ZP1BESGX76',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyABaDmhxNZFCguByDAd3KzHZFDJKNw731E',
-    appId: '1:894080515848:android:45890f614d311b035f76bd',
+    appId: '1:894080515848:android:9840ec0ccfb300e25f76bd',
     messagingSenderId: '894080515848',
     projectId: 'seedfinder-23b19',
     storageBucket: 'seedfinder-23b19.appspot.com',
@@ -60,29 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDRLrPPcWTC_591TySgVO8tf3Q8krqhzu8',
-    appId: '1:894080515848:ios:d6a69007488e37995f76bd',
+    appId: '1:894080515848:ios:8cd908218be632095f76bd',
     messagingSenderId: '894080515848',
     projectId: 'seedfinder-23b19',
     storageBucket: 'seedfinder-23b19.appspot.com',
-    iosBundleId: 'com.example.seedFinder',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDRLrPPcWTC_591TySgVO8tf3Q8krqhzu8',
-    appId: '1:894080515848:ios:d6a69007488e37995f76bd',
-    messagingSenderId: '894080515848',
-    projectId: 'seedfinder-23b19',
-    storageBucket: 'seedfinder-23b19.appspot.com',
-    iosBundleId: 'com.example.seedFinder',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDf9lreN2eFpw4y6tI7pEPCaLjlR4g3kwM',
-    appId: '1:894080515848:web:b8576f666eb986a65f76bd',
-    messagingSenderId: '894080515848',
-    projectId: 'seedfinder-23b19',
-    authDomain: 'seedfinder-23b19.firebaseapp.com',
-    storageBucket: 'seedfinder-23b19.appspot.com',
-    measurementId: 'G-N9LLJXT71Y',
+    iosBundleId: 'com.konkuk.seedfinder',
   );
 }
